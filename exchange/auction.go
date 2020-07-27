@@ -149,6 +149,8 @@ func (a *auction) doCache(ctx context.Context, cache prebid_cache_client.Client,
 						Data:       jsonBytes,
 						TTLSeconds: cacheTTL(expByImp[impID], topBidPerBidder.bid.Exp, defTTL(topBidPerBidder.bidType, defaultTTLs), ttlBuffer),
 					})
+					fmt.Println(expByImp[impID])
+					fmt.Println(topBidPerBidder.bid)
 					bidIndices[len(toCache)-1] = topBidPerBidder.bid
 				} else {
 					errs = append(errs, err)
