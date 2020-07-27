@@ -149,7 +149,6 @@ func (a *auction) doCache(ctx context.Context, cache prebid_cache_client.Client,
 						Data:       jsonBytes,
 						TTLSeconds: cacheTTL(expByImp[impID], topBidPerBidder.bid.Exp, defTTL(topBidPerBidder.bidType, defaultTTLs), ttlBuffer),
 					})
-					fmt.Println(cacheTTL(expByImp[impID], topBidPerBidder.bid.Exp, defTTL(topBidPerBidder.bidType, defaultTTLs), ttlBuffer))
 					bidIndices[len(toCache)-1] = topBidPerBidder.bid
 				} else {
 					errs = append(errs, err)
@@ -250,6 +249,7 @@ func maybeMake(shouldMake bool, capacity int) []prebid_cache_client.Cacheable {
 }
 
 func cacheTTL(impTTL int64, bidTTL int64, defTTL int64, buffer int64) (ttl int64) {
+	fmt.Println(impTTL, bidTTL, defTTL, buffer)
 	if impTTL <= 0 && bidTTL <= 0 {
 		// Only use default if there is no imp nor bid TTL provided. We don't want the default
 		// to cut short a requested longer TTL.
